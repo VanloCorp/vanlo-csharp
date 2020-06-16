@@ -1,0 +1,130 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Vanlo.NetCore20</RootNamespace>
+    <AssemblyName>Vanlo.NetCore20</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\lib</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\lib\netcoreapp2.0\Vanlo.NetCore20.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Vanlo.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\Vanlo\Address.cs">
+      <Link>Address.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\ApiKey.cs">
+      <Link>ApiKey.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\Batch.cs">
+      <Link>Batch.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\BatchShipment.cs">
+      <Link>BatchShipment.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\Client.cs">
+      <Link>Client.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\ClientConfiguration.cs">
+      <Link>ClientConfiguration.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\ClientManager.cs">
+      <Link>ClientManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\CustomsInfo.cs">
+      <Link>CustomsInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\CustomsItem.cs">
+      <Link>CustomsItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\Exception.cs">
+      <Link>Exception.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\IResource.cs">
+      <Link>IResource.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\Options.cs">
+      <Link>Options.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\Parcel.cs">
+      <Link>Parcel.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\PostageLabel.cs">
+      <Link>PostageLabel.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\Rate.cs">
+      <Link>Rate.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\Request.cs">
+      <Link>Request.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\Resource.cs">
+      <Link>Resource.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\ScanForm.cs">
+      <Link>ScanForm.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\ScanFormList.cs">
+      <Link>ScanFormList.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\Security.cs">
+      <Link>Security.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\Shipment.cs">
+      <Link>Shipment.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\ShipmentList.cs">
+      <Link>ShipmentList.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\Tracker.cs">
+      <Link>Tracker.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\TrackerList.cs">
+      <Link>TrackerList.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\TrackingDetail.cs">
+      <Link>TrackingDetail.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\TrackingLocation.cs">
+      <Link>TrackingLocation.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\Verification.cs">
+      <Link>Verification.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\Verifications.cs">
+      <Link>Verifications.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\Webhook.cs">
+      <Link>Webhook.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\WebhookList.cs">
+      <Link>WebhookList.cs</Link>
+    </Compile>
+    <Compile Include="..\Vanlo\Error.cs">
+      <Link>Error.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Vanlo.pfx" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="RestSharp" Version="106.4.2" />
+  </ItemGroup>
+</Project>
