@@ -1,9 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>vanlo_csharp</RootNamespace>
-  </PropertyGroup>
+		<PackageId>Vanlo-Official</PackageId>
+		<Version>1.0.1</Version>
+		<Authors>Vanlo</Authors>
+		<Company>Vanlo</Company>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<Title>Vanlo C# SDK</Title>
+		<Description>Vanlo C# SDK https://api-docs.vanlo.com</Description>
+		<PackageTags>Vanlo Shipping API SDK</PackageTags>
+		<RepositoryUrl>https://github.com/VanloCorp/vanlo-csharp</RepositoryUrl>
+
+		<OutputType>Library</OutputType>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<RootNamespace>vanlo_csharp</RootNamespace>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+		<PackageReference Include="RestSharp" Version="105.2.3" />
+	</ItemGroup>
 
 </Project>

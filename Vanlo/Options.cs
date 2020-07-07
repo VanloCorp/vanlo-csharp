@@ -23,6 +23,7 @@ namespace Vanlo {
         public string commercial_invoice_format { get; set; }
         public string commercial_invoice_size { get; set; }
         public string cost_center { get; set; }
+        public bool? create_and_buy { get; set; }
         public string currency { get; set; }
         public string customs_broker_address_id { get; set; }
         public double? declared_value { get; set; }

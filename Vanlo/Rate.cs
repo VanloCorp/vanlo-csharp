@@ -7,7 +7,6 @@ namespace Vanlo {
         public string id { get; set; }
         public DateTime? created_at { get; set; }
         public DateTime? updated_at { get; set; }
-        public string mode { get; set; }
         public string service { get; set; }
         public string rate { get; set; }
         public string list_rate { get; set; }
@@ -22,17 +21,5 @@ namespace Vanlo {
         public string carrier { get; set; }
         public string shipment_id { get; set; }
         public string carrier_account_id { get; set; }
-
-        /// <summary>
-        /// Retrieve a Rate from its id.
-        /// </summary>
-        /// <param name="id">String representing a Rate. Starts with "rate_".</param>
-        /// <returns>Vanlo.Rate instance.</returns>
-        public static Rate Retrieve(string id) {
-            Request request = new Request("/rates/{id}");
-            request.AddUrlSegment("id", id);
-
-            return request.Execute<Rate>();
-        }
     }
 }

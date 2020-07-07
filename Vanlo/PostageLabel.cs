@@ -17,6 +17,5 @@ namespace Vanlo {
         public string label_pdf_url { get; set; }
         public string label_epl2_url { get; set; }
         public string label_zpl_url { get; set; }
-        public string mode { get; set; }
     }
 }

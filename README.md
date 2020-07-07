@@ -1,6 +1,6 @@
-# Vanlo .Net Client Library
+# Vanlo C# .NET SDK
 
-Vanlo offers a simple shipping API. Please visit our support pages at https://support.vanlo.com for documentation and assistance.
+Vanlo offers a simple shipping API for rating and buying shipping labels.
 
 ## Documentation
 
@@ -8,12 +8,13 @@ Up-to-date documentation at: https://api-docs.vanlo.com
 
 ### Configuration
 
-During the initialization of your application add the following to configure Vanlo.
+During the initialization of your application add the following to configure Vanlo.  The second line demonstrates how to use the SDK in "test" mode.
 
 ```cs
 using Vanlo;
 
-ClientManager.SetCurrent("ApiKey");
+ClientManager.SetCurrent("YOUR_PROD_API_KEY");
+// ClientManager.SetCurrent("YOUR_TEST_API_KEY", https://test.vanlo.com/api/v1);
 ```
 
 ### Address Verification
@@ -24,8 +25,9 @@ An `Address` can be verified.
 using Vanlo;
 
 Address address = new Address() {
-    name = "John Dow",
+    name = "John Doe",
     street1 = "722 Montgomery St, Ste. 305",
+		street2 = "",
     city = "San Francisco",
     state = "CA",
     country = "US",
@@ -54,7 +56,8 @@ Parcel parcel = new Parcel() {
     width = 10.0,
     length = 9.0,
     height = 8.0,
-    weight = 15.9
+    weight = 15.9,
+		predefined_package = "Parcel"
 };
 
 Shipment shipment = new Shipment() {
@@ -70,15 +73,16 @@ foreach (Rate rate in shipment.rates) {
 }
 ```
 
-### Postage Label Generation
+### Create and Buy Postage Label
 
-Purchasing a shipment will generate a `PostageLabel`.
+You can create and buy a shipment in either one step or two to generate a postage label and tracking code:
 
 ```cs
 Address fromAddress = new Address() { id = "adr_..." };
 Address toAddress = new Address() {
     name = "John Dow",
     street1 = "722 Montgomery St, Ste. 305",
+		street2 = "",
     city = "San Francisco",
     state = "CA",
     country = "US",
@@ -86,10 +90,10 @@ Address toAddress = new Address() {
 };
 
 Parcel parcel = new Parcel() {
-    width = 15.2,
-    length = 18,
+    length = 12.0,
+    width = 11.2,
     height = 9.5,
-    weight = 10
+    weight = 15.9
 };
 
 CustomsItem item = new CustomsItem() {
@@ -101,17 +105,17 @@ CustomsItem item = new CustomsItem() {
     hs_tariff_number = "123456"
 };
 CustomsInfo info = new CustomsInfo() {
-    customs_certify = true,
+		customs_signer = "Warehouse Manager",
+    customs_certify = "true",
     eel_pfc = "NOEEI 30.37(a)",
     customs_items = new List<CustomsItem>() { item }
 };
 
 Options options = new Options() {
     label_format = "zpl",
-    label_size = "4X6",
-    label_date= new DateTime(2020, 4, 25, 8, 30, 52), //Make sure to set this date in future
     postage_label_inline = true,
-    delivery_confirmation = "NO_SIGNATURE"
+    delivery_confirmation = "NO_SIGNATURE",
+		create_and_buy = true // create and buy in one step
 };
 
 Shipment shipment = new Shipment() {
@@ -119,10 +123,13 @@ Shipment shipment = new Shipment() {
     to_address = toAddress,
     parcel = parcel,
     customs_info = info,
-    options = options
+    options = options,
+		service = "Priority" // required to create and buy in one step
 };
 
 shipment.Create();
-shipment.Buy(shipment.LowestRate());
+// shipment.Buy(shipment.LowestRate()) // if options.create_and_buy was false
 
-shipment.postage_label.url;
+// shipment.tracking_code;
+// shipment.postage_label.label_url;
+```

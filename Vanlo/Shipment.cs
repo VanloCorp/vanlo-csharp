@@ -7,7 +7,6 @@ using System.Linq;
 namespace Vanlo {
     public class Shipment : Resource {
         public string id { get; set; }
-        public string mode { get; set; }
         public DateTime? created_at { get; set; }
         public DateTime? updated_at { get; set; }
         public string tracking_code { get; set; }
@@ -33,6 +32,7 @@ namespace Vanlo {
         public string usps_zone { get; set; }
         public string batch_id { get; set; }
         public string order_id { get; set; }
+        public string service { get; set; }
 
         /// <summary>
         /// Get a paginated list of shipments.
@@ -49,7 +49,7 @@ namespace Vanlo {
         /// </param>
         /// <returns>Instance of Vanlo.ShipmentList</returns>
         public static ShipmentList List(Dictionary<string, object> parameters = null) {
-            Request request = new Request("api/v1/shipments");
+            Request request = new Request("/shipments");
             request.AddQueryString(parameters ?? new Dictionary<string, object>());
 
             ShipmentList shipmentList = request.Execute<ShipmentList>();
@@ -63,7 +63,7 @@ namespace Vanlo {
         /// <param name="id">String representing a Shipment. Starts with "shp_".</param>
         /// <returns>Vanlo.Shipment instance.</returns>
         public static Shipment Retrieve(string id) {
-            Request request = new Request("api/v1/shipments/{id}");
+            Request request = new Request("/shipments/{id}");
             request.AddUrlSegment("id", id);
 
             return request.Execute<Shipment>();
@@ -103,7 +103,7 @@ namespace Vanlo {
         }
 
         private static Shipment sendCreate(Dictionary<string, object> parameters) {
-            Request request = new Request("api/v1/shipments", Method.POST);
+            Request request = new Request("/shipments", Method.POST);
             request.AddBody(new Dictionary<string, object>() { { "shipment", parameters } });
 
             return request.Execute<Shipment>();
@@ -116,7 +116,7 @@ namespace Vanlo {
             if (id == null)
                 Create();
 
-            Request request = new Request("api/v1/shipments/{id}/rates");
+            Request request = new Request("/shipments/{id}/rates");
             request.AddUrlSegment("id", id);
 
             rates = request.Execute<Shipment>().rates;
@@ -126,23 +126,17 @@ namespace Vanlo {
         /// Purchase a label for this shipment with the given rate.
         /// </summary>
         /// <param name="rateId">The id of the rate to purchase the shipment with.</param>
-        /// <param name="insuranceValue">The value to insure the shipment for.</param>
 
-        public void Buy(string rateId, string insuranceValue = null) {
-            Request request = new Request("api/v1/shipments/{id}/buy", Method.POST);
+        public void Buy(string rateId) {
+            Request request = new Request("/shipments/{id}/buy", Method.POST);
             request.AddUrlSegment("id", id);
 
             Dictionary<string, object> body = new Dictionary<string, object>() { { "rate", new Dictionary<string, object>() { { "id", rateId } } } };
-
-            if (insuranceValue != null) {
-                body["insurance"] = insuranceValue;
-            }
 
             request.AddBody(body);
 
             Shipment result = request.Execute<Shipment>();
 
-            insurance = result.insurance;
             postage_label = result.postage_label;
             tracking_code = result.tracking_code;
             tracker = result.tracker;
@@ -150,36 +144,14 @@ namespace Vanlo {
         }
 
         /// <summary>
-        /// Purchase a label for this shipment with the given rate.
-        /// </summary>
-        /// <param name="rate">Vanlo.Rate object to puchase the shipment with.</param>
-        /// <param name="insuranceValue">The value to insure the shipment for.</param>
-        public void Buy(Rate rate, string insuranceValue = null) {
-            Buy(rate.id, insuranceValue);
-        }
-
-        /// <summary>
-        /// Insure shipment for the given amount.
-        /// </summary>
-        /// <param name="amount">The amount to insure the shipment for. Currency is provided when creating a shipment.</param>
-        public void Insure(double amount) {
-            Request request = new Request("api/v1/shipments/{id}/insure", Method.POST);
-            request.AddUrlSegment("id", id);
-            request.AddQueryString(new Dictionary<string, object>() { { "amount", amount } });
-
-            Merge(request.Execute<Shipment>());
-        }
-
-        /// <summary>
         /// Generate a postage label for this shipment.
         /// </summary>
         /// <param name="fileFormat">Format to generate the label in. Valid formats: "pdf", "zpl" and "epl2".</param>
         public void GenerateLabel(string fileFormat) {
-            Request request = new Request("api/v1/shipments/{id}/label");
+            Request request = new Request("/shipments/{id}/label");
             request.AddUrlSegment("id", id);
             // This is a GET, but uses the request body, so use ParameterType.GetOrPost instead.
             request.AddParameter("file_format", fileFormat, ParameterType.GetOrPost);
-
             Merge(request.Execute<Shipment>());
         }
 
@@ -187,7 +159,7 @@ namespace Vanlo {
         /// Send a refund request to the carrier the shipment was purchased from.
         /// </summary>
         public void Refund() {
-            Request request = new Request("api/v1/shipments/{id}/refund", Method.POST);
+            Request request = new Request("/shipments/{id}/refund", Method.POST);
             request.AddUrlSegment("id", id);
 
             Merge(request.Execute<Shipment>());

@@ -17,7 +17,6 @@ namespace Vanlo {
         public string restriction_type { get; set; }
         public string restriction_comments { get; set; }
         public List<CustomsItem> customs_items { get; set; }
-        public string mode { get; set; }
 
         /// <summary>
         /// Create a CustomsInfo.

@@ -24,7 +24,6 @@ namespace Vanlo {
         public string carrier_facility { get; set; }
         public List<string> verify { get; set; }
         public List<string> verify_strict { get; set; }
-        public string mode { get; set; }
         public string error { get; set; }
         public string message { get; set; }
         public Verifications verifications { get; set; }

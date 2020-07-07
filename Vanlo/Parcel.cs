@@ -6,7 +6,6 @@ using System.Collections.Generic;
 namespace Vanlo {
     public class Parcel : Resource {
         public string id { get; set; }
-        public string mode { get; set; }
         public DateTime? created_at { get; set; }
         public DateTime? updated_at { get; set; }
         public double? length { get; set; }

@@ -16,7 +16,6 @@ namespace Vanlo {
         public Dictionary<string, int> status { get; set; }
         public ScanForm scan_form { get; set; }
         public string label_url { get; set; }
-        public string mode { get; set; }
         public string error { get; set; }
         public string message { get; set; }
 
