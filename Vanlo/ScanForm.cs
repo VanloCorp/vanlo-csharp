@@ -55,6 +55,22 @@ namespace Vanlo {
         }
 
         /// <summary>
+        /// Create a ScanForm by reference.
+        /// </summary>
+        /// <param name="reference">Reference of all unmanifested shipments from which to create a ScanForm</param>
+        /// <returns>Vanlo.ScanForm instance.</returns>
+        public static ScanForm CreateByReference(String reference) {
+            Dictionary<string, object> parameters = new Dictionary<string, object> {
+                { "reference", reference }
+            };
+
+            Request request = new Request("/scan_forms/all", Method.POST);
+            request.AddBody(parameters);
+
+            return request.Execute<ScanForm>();
+        }
+
+        /// <summary>
         /// Retrieve a ScanForm from its id.
         /// </summary>
         /// <param name="id">String representing a scan form, starts with "sf_".</param>
