@@ -18,6 +18,7 @@ namespace Vanlo {
         public Address from_address { get; set; }
         public Address to_address { get; set; }
         public Parcel parcel { get; set; }
+        public List<Parcel> parcels  { get; set; }
         public PostageLabel postage_label { get; set; }
         public List<Rate> rates { get; set; }
         public ScanForm scan_form { get; set; }
@@ -33,6 +34,7 @@ namespace Vanlo {
         public string batch_id { get; set; }
         public string order_id { get; set; }
         public string service { get; set; }
+        public string carrier { get; set; }
 
         /// <summary>
         /// Get a paginated list of shipments.
