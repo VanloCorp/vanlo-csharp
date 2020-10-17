@@ -13,6 +13,7 @@ namespace Vanlo {
         public double? height { get; set; }
         public double weight { get; set; }
         public string predefined_package { get; set; }
+        public List<CustomsItem> customs_items { get; set; }
 
         /// <summary>
         /// Retrieve a Parcel from its id.
