@@ -2,7 +2,7 @@
 
   <PropertyGroup>
 		<PackageId>Vanlo-Official</PackageId>
-		<Version>1.0.1</Version>
+		<Version>1.1.0</Version>
 		<Authors>Vanlo</Authors>
 		<Company>Vanlo</Company>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
