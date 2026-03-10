@@ -192,6 +192,24 @@ namespace Vanlo {
             return result.OrderBy(rate => double.Parse(rate.rate)).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Submit a dispute adjustment for this shipment.
+        /// </summary>
+        /// <param name="reason">The reason for the dispute adjustment.</param>
+        /// <param name="expectedRate">Optional expected rate for the adjustment.</param>
+        public void DisputeAdjustment(string reason, string expectedRate = null) {
+            Request request = new Request("/shipments/{id}/dispute_adjustment", Method.POST);
+            request.AddUrlSegment("id", id);
+
+            Dictionary<string, object> body = new Dictionary<string, object>() { { "reason", reason } };
+            if (expectedRate != null)
+                body["expected_rate"] = expectedRate;
+
+            request.AddBody(body);
+
+            Merge(request.Execute<Shipment>());
+        }
+
         private void filterRates(ref List<Rate> rates, Func<Rate, bool> filter) {
             rates = rates.Where(filter).ToList();
         }

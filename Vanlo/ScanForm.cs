@@ -65,5 +65,17 @@ namespace Vanlo {
 
             return request.Execute<ScanForm>();
         }
+
+        /// <summary>
+        /// Create scan forms for all shipments that have not yet been associated with a scan form.
+        /// </summary>
+        /// <param name="parameters">Optional dictionary containing parameters for the request.</param>
+        /// <returns>Vanlo.ScanForm instance.</returns>
+        public static ScanForm CreateAll(Dictionary<string, object> parameters = null) {
+            Request request = new Request("/scan_forms/all", Method.POST);
+            request.AddBody(parameters ?? new Dictionary<string, object>());
+
+            return request.Execute<ScanForm>();
+        }
     }
 }
